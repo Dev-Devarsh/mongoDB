@@ -2,22 +2,27 @@
 
 const dbConnection = require('./mongodb');
 
-//toArray will return promise(Future) objects 
-//.then method is used to handle promise(Future) objects
-// (method 1) how to handle promise(Future) objects
-dbConnection().then((result) => {
-    result.find().toArray().then((data)=> {
-            //console.warn(data);
-        })
-    });
+async function insert () {
+    const db = await dbConnection();
+    // insert one entry
+    let result = await db.insertOne(
+    {name : 'test 2525' ,age : '123' ,no: 15313846,}
+    )
+    // with the help of insertedID & acknowledged you can pass status code
+    console.log(result.insertedId);
+    console.log(result);
+    
+    // to insert multiple entries
 
+    let result2 = await db.insertMany(
+    [
+        {name : 'test 2525' ,age : '123' ,no: 47817,},
+        {name : 'test 541' ,age : '5582' ,no: 58927,},
+        {name : 'test 418' ,age : '817' ,no: 1581771,},
+    ]);
+    console.log(result2.insertedIds);
+    console.log(result2.insertedCount);
 
-// how to make function without using function keyWord
-// (method 2) how to handle promise(Future) objects
- const main = async() =>{
-    let data = await dbConnection();
-    data = await data.find().toArray();
-    console.warn(data);
 }
 
-main();
+// insert();
