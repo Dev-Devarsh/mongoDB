@@ -13,10 +13,10 @@ app.get('/', async function (req, res){ // or app.get('/', async (req, res)=>{}
     
 });
 app.post('/', async function (req, res){ // or app.get('/', async (req, res)=>{}
- 
+    let data = await dbConnect();
+    let result = await data.insertOne(req.body)
     console.log(req.body);
-    res.send({status : '200'})
-    
+    res.send(result)
 });
  
 app.listen(4500);
