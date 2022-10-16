@@ -1,24 +1,21 @@
-const http = require('http');
-const express = require('express');
-const dbConnect = require('./mongodb');
-const mongodb = require('mongodb');
-const app =  express();
+// in mongooes we can apply schemas , validation , control fields creation and it's type
+// mongooes has two types  (1) schema , (2) model
+// (1) schemas are used define fiels in db
+// (2) model by using schemas connects node-JS to mongoDB
 
-app.use(express.json()); // to convert post api data into json
-
-app.delete('/',async function (req, res) {
-    let data = await dbConnect();
-    // only use this method
-    let result  = await data.deleteOne({_id: new mongodb.ObjectId(req.params.id)});
+const mongooes = require('mongoose');
+const uri = 'mongodb://localhost:27017/express';
+async function main() {
+    await mongooes.connect(uri);
+    const schemas = new mongooes.Schemas({
+        name:String
+    })
+    const ProfileModel = mongooes.model('mongo',schemas);
+    let data =  ProfileModel({name:'devarsh'});
+    let result = await data.save();
     console.log(result);
+} 
 
-    if (result.acknowledged) {
-        res.send({"status": 200});
-        
-    } else {
-        res.send({"status": 404});
-        
-    }
-}); 
+main();
  
-app.listen(4500);
+// app.listen(4500);
