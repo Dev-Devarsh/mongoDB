@@ -9,6 +9,8 @@
   "author": "devrash_mongoDB",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
     "mongodb": "^4.10.0",
     "mongoose": "^6.6.5"
   }
