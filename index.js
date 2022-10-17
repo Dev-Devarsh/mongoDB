@@ -9,14 +9,14 @@ async function main() {
     await mongooes.connect(uri);
     const schemas = new mongooes.Schema({
         name:String,
-        age : Number,
+        age : Number
     })
-    const ProfileModel = mongooes.model('mongos',schemas);
-    let data = new ProfileModel({name:'devarsh',age:8888});
+    const ProfileModel = mongooes.model('mongo',schemas);
+    let data =  ProfileModel({name:'devarsh' , age : 24});
     let result = await data.save();
     console.log(result);
 } 
 
-main();
+// main();
  
 // app.listen(4500);
