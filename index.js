@@ -33,8 +33,9 @@ app.delete("/delete", async (req, resp) => {
 
 app.post('/create', async function (req, resp) {
     // reqest body will be maped to 'profileSchema' , same like model class
-    /*  if you pass age as string this schema will convert that string in to a number if it can convertable 
-        otherwise it will give you an error , if you pass 'abc' as age programm will terminate you have to re-run program
+    /*  if you pass age as string this schema will convert that string in to a number and it will not give an error ,if it 
+        is not convertable to int it will give you an error , if you pass 'abc' as age programm will terminate you have 
+        to re-run program
      */
     let data = await new profileSchema(req.body); 
     let result = await data.save();
