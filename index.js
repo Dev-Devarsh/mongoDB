@@ -7,11 +7,12 @@ const mongooes = require('mongoose');
 const uri = 'mongodb://localhost:27017/express';
 async function main() {
     await mongooes.connect(uri);
-    const schemas = new mongooes.Schemas({
-        name:String
+    const schemas = new mongooes.Schema({
+        name:String,
+        age : Number,
     })
-    const ProfileModel = mongooes.model('mongo',schemas);
-    let data =  ProfileModel({name:'devarsh'});
+    const ProfileModel = mongooes.model('mongos',schemas);
+    let data = new ProfileModel({name:'devarsh',age:8888});
     let result = await data.save();
     console.log(result);
 } 
