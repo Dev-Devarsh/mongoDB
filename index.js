@@ -5,17 +5,21 @@
 
 const mongooes = require('mongoose');
 const uri = 'mongodb://localhost:27017/express';
-async function main() {
-    await mongooes.connect(uri);
-    const schemas = new mongooes.Schemas({
-        name:String
-    })
-    const ProfileModel = mongooes.model('mongo',schemas);
-    let data =  ProfileModel({name:'devarsh'});
-    let result = await data.save();
-    console.log(result);
-} 
 
-main();
- 
-// app.listen(4500);
+ upDateDB = async () => {
+    await mongooes.connect(uri);
+    const schemas = new mongooes.Schema({
+        name: String,
+        age: Number
+    })
+    const ageModel =  mongooes.model('mongo', schemas);
+    let data = await ageModel.updateOne(
+        { name: 'devarsh 13213' },
+        {
+            $set: { name: 'devarsh 444' }
+        }
+    )
+    console.log(data);
+    
+}
+upDateDB()
