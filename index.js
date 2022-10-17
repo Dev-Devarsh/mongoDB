@@ -11,8 +11,13 @@ const profileSchema = require('./profile');
 
 
 const app = express();
-app.post('/create', function (req, resp) { 
-    response.send('done');
+app.use(express.json()); // to convert post api data into json
+
+app.post('/create', async function (req, resp) {
+    let data = new profileSchema(req.body);
+    let result = await data.save();
+    console.log(req.body);
+    resp.send(result);
 });
 
 app.listen(5000)
