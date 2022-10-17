@@ -12,10 +12,11 @@ const profileSchema = require('./profile');
 const app = express();
 app.use(express.json()); // to convert post api data into json
 
-app.get('/', async (req, resp) => {
+app.get('/list', async (req, resp) => {
     let data = await profileSchema.find();
     console.log(data);
     resp.send(data);
 });
 
+app
 app.listen(5000)
