@@ -20,8 +20,8 @@ app.get("/list", async (req, resp) => {
     }
 });
 
-app.delete("/delete", async (req, resp) => {
-    let data = await profileSchema.deleteOne({ name: "dev 132" });
+app.delete("/delete/:_id", async (req, resp) => {
+    let data = await profileSchema.deleteOne(req.params);
     console.log(data);
     if (data.acknowledged == true && data.deletedCount != 0) {
         resp.status(200).send(data)
@@ -49,10 +49,10 @@ app.post('/create', async function (req, resp) {
 });
 
 
-app.put("/update", async (req, resp) => {
+app.put("/update/:_id", async (req, resp) => {
     let data = await profileSchema.updateOne(
-        { name: "devarsh" },
-        { $set: { name: "dev 132" } }
+        req.params , // query params has '{}' brackets itself so we don't need to take '{}' brackets
+        { $set: req.body }
     );
     if (data.acknowledged == true && data.modifiedCount != 0
         && data.matchedCount != 0) {
